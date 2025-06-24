@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Panel</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  #entries-section {
+    margin-top: 20px;
+  }
+  /* Removed #login-section styles as per instructions */
+</style>
+</head>
+<body>
+<h1>Admin Panel</h1>
+
+<section id="entries-section">
+  <h2>Entries</h2>
+  <div id="entries"></div>
+</section>
+
+<script>
+  // Removed PASSWORD and authenticate() function as per instructions
+
+  async function fetchEntries() {
+    try {
+      const response = await fetch('/api/entries');
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+      const entriesDiv = document.getElementById('entries');
+      entriesDiv.innerHTML = '';
+      data.forEach(entry => {
+        const div = document.createElement('div');
+        div.textContent = JSON.stringify(entry);
+        entriesDiv.appendChild(div);
+      });
+    } catch (error) {
+      console.error('Error fetching entries:', error);
+    }
+  }
+
+  // Removed login waiting condition; call fetchEntries() directly
+  fetchEntries();
+</script>
+</body>
+</html>
