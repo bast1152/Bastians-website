@@ -27,7 +27,7 @@
 
   async function fetchEntries() {
     try {
-      const response = await fetch('/api/entries');
+      const response = await fetch('https://bastians-website-backend.onrender.com/api/guestbook');
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       const entriesDiv = document.getElementById('entries');
