@@ -81,7 +81,7 @@ document.getElementById('guestbook-form').addEventListener('submit', async funct
     const name = document.getElementById('name').value;
     const message = document.getElementById('message').value;
 
-    const res = await fetch('http://localhost:3000/api/guestbook', {
+    const res = await fetch('https://bastians-website-backend.onrender.com/api/guestbook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, message })
