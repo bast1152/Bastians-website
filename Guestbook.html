@@ -64,10 +64,10 @@
             <p>Leave a message below to let me know you stopped by!</p>
             <form id="guestbook-form" action="#" method="post">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name" required>
 
                 <label for="message">Message:</label>
-                <textarea id="message" name="message"></textarea>
+                <textarea id="message" name="message" required></textarea>
 
                 <input type="submit" value="Submit">
             </form>
@@ -80,6 +80,7 @@ document.getElementById('guestbook-form').addEventListener('submit', async funct
 
     const name = document.getElementById('name').value;
     const message = document.getElementById('message').value;
+    console.log({ name, message });
 
     const res = await fetch('https://bastians-website-backend.onrender.com/api/guestbook', {
         method: 'POST',
