@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guestbook</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+        header h1 {
+            color: white;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        label, textarea, input[type="text"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        textarea {
+            height: 100px;
+            border-radius: 5px;
+            padding: 8px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: auto;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Guestbook</h1>
+    </header>
+    <main>
+        <section>
+            <p>Leave a message below to let me know you stopped by!</p>
+            <form id="guestbook-form" action="#" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <input type="submit" value="Submit">
+            </form>
+        </section>
+    </main>
+</body>
+<script>
+document.getElementById('guestbook-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const message = document.getElementById('message').value;
+    console.log({ name, message });
+
+    const res = await fetch('https://bastians-website-backend.onrender.com/api/guestbook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, message })
+    });
+
+    if (res.ok) {
+        alert("Message submitted!");
+        e.target.reset();
+    } else {
+        alert("Error submitting message.");
+    }
+});
+</script>
+</html>
