@@ -2,8 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bastian's website</title>
-        <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
+        <!-- You can replace this with your own favicon -->
+        <!-- <link rel="icon" href="your-favicon.ico" type="image/x-icon"> -->
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -39,6 +41,10 @@
             section {
                 margin-bottom: 40px;
             }
+            .warning {
+                color: red;
+                font-weight: bold;
+            }
         </style>
     </head>
     <body>
@@ -49,12 +55,12 @@
         <section class="intro-section">
             <h2>Hi, I'm Bastian.</h2>
             <p>Welcome to my personal website, where I share my tech experiments and other cool stuff!</p>
-            <p style="color: red; font-weight: bold;">Disclaimer: Don't expect too much of this website. It is a work in progress.</p>
+            <p class="warning">Disclaimer: Don't expect too much of this website. It is a work in progress.</p>
         </section>
         <section class="contact-section">
             <h2>Get in Touch</h2>
             <p>You might want to <a href="mailto:bastianjs2006@gmail.com">contact me</a>.</p>
-            <p>You might want to leave a message in the <a href="Guestbook.html">guestbook</a>.</p>
+            <p>You might want to leave a message in the <a href="guestbook.html">guestbook</a>.</p>
         </section>
         <section class="about-section">
             <h2>About Me</h2>
@@ -77,10 +83,16 @@
             </section>
             <section class="project-highlights-section">
                 <h2>Project Highlights</h2>
+                <ul>
+                    <li><strong>Raspberry Pi Weather Station</strong> – Built a local weather tracking system using sensors and Python.</li>
+                    <li><strong>Custom Mechanical Keyboard</strong> – Designed and assembled a keyboard with QMK firmware.</li>
+                    <li><strong>Linux Dotfiles Repo</strong> – Configured and shared personalized Linux setup for faster deployment.</li>
+                    <li><strong>Micro:Bit Reaction Timer</strong> – A fun project to test and improve reflexes using Micro:Bit.</li>
+                </ul>
             </section>
             <section class="setup-section">
                 <h2>Current Setup</h2>
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Laptop image" width="400">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="My laptop setup with macOS Sequoia" width="400">
                 <h3>Specifications</h3>
                 <ul>
                     <li>MacBook Air 13" (2025)</li>
@@ -90,6 +102,18 @@
                     <li>macOS Sequioa</li>
                 </ul>
             </section>
+            <section class="goals-section">
+                <h2>Future Goals</h2>
+                <ul>
+                    <li>Learn Rust and contribute to open-source projects</li>
+                    <li>Build a personal home server for file storage and experimentation</li>
+                    <li>Start a blog to document projects and share knowledge</li>
+                    <li>Explore AI and machine learning through hands-on projects</li>
+                </ul>
+            </section>
         </main>
+        <footer style="text-align: center; padding: 20px; background-color: #eee;">
+            <p>&copy; 2025 Bastian Solheim. All rights reserved.</p>
+        </footer>
     </body>
-</html>    </file>
+</html>    
