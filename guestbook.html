@@ -71,6 +71,8 @@
 
                 <input type="submit" value="Submit">
             </form>
+            <h2>Messages</h2>
+            <ul id="entries" style="list-style: none; padding-left: 0;"></ul>
         </section>
     </main>
 </body>
@@ -91,9 +93,38 @@ document.getElementById('guestbook-form').addEventListener('submit', async funct
     if (res.ok) {
         alert("Message submitted!");
         e.target.reset();
+        loadMessages();
     } else {
         alert("Error submitting message.");
     }
 });
+
+async function loadMessages() {
+    const res = await fetch('https://bastians-website-backend.onrender.com/api/guestbook');
+    if (!res.ok) {
+        console.error('Failed to load messages');
+        return;
+    }
+    const entries = await res.json();
+    const entriesList = document.getElementById('entries');
+    entriesList.innerHTML = '';
+    entries.forEach(({ name, message, date }) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${escapeHtml(name)}</strong> <em>${new Date(date).toLocaleString()}</em><br>${escapeHtml(message)}`;
+        li.style.borderBottom = '1px solid #ccc';
+        li.style.padding = '10px 0';
+        entriesList.appendChild(li);
+    });
+}
+
+function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;',
+        '"': '&quot;', "'": '&#039;'
+    }[c]));
+}
+
+// Load messages on page load
+window.addEventListener('DOMContentLoaded', loadMessages);
 </script>
 </html>
