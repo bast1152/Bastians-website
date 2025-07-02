@@ -77,6 +77,12 @@
     </main>
 </body>
 <script>
+// Automatically choose the correct backend
+const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const BASE_URL = isLocal
+  ? 'http://localhost:3000/api/guestbook'
+  : 'https://bastians-website-backend.onrender.com/api/guestbook';
+
 document.getElementById('guestbook-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -84,28 +90,34 @@ document.getElementById('guestbook-form').addEventListener('submit', async funct
     const message = document.getElementById('message').value;
     console.log({ name, message });
 
-    const res = await fetch('https://bastians-website-backend.onrender.com/api/guestbook', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, message })
-    });
+    try {
+        const res = await fetch(BASE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, message })
+        });
 
-    if (res.ok) {
-        alert("Message submitted!");
-        e.target.reset();
-        loadMessages();
-    } else {
-        const err = await res.json();
-        if (res.status === 409) {
-            alert("Cannot submit duplicate messages.");
+        if (res.ok) {
+            alert("Message submitted!");
+            e.target.reset();
+            loadMessages();
         } else {
-            alert("Error submitting message.");
+            const err = await res.json();
+            if (res.status === 409) {
+                alert("Cannot submit duplicate messages.");
+            } else {
+                alert("Error submitting message.");
+            }
         }
+    } catch (err) {
+        // Network error or backend unreachable
+        alert("Backend not available. Please try again later.");
+        console.error('Submission failed:', err);
     }
 });
 
 async function loadMessages() {
-    const res = await fetch('https://bastians-website-backend.onrender.com/api/guestbook');
+    const res = await fetch(BASE_URL);
     if (!res.ok) {
         console.error('Failed to load messages');
         return;
