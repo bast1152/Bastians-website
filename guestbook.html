@@ -95,7 +95,12 @@ document.getElementById('guestbook-form').addEventListener('submit', async funct
         e.target.reset();
         loadMessages();
     } else {
-        alert("Error submitting message.");
+        const err = await res.json();
+        if (res.status === 409) {
+            alert("Cannot submit duplicate messages.");
+        } else {
+            alert("Error submitting message.");
+        }
     }
 });
 
